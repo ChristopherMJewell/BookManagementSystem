@@ -1,3 +1,6 @@
+import Model.Author;
+import Repository.AuthorDao;
+
 import java.util.Scanner;
 
 
@@ -17,6 +20,21 @@ public class Main {
             System.out.println("6: View Books By Genre");
             System.out.println("7: ");
 
+            int choice = scanner.nextInt();
+
+            switch(choice){
+                case 1 :
+                    Author author = new Author();
+                    System.out.println("Please enter the first name");
+                    String firstName = scanner.next();
+                    author.setFirstName(firstName);
+                    System.out.println("Please enter the last name");
+                    String lastName = scanner.next();
+                    author.setLastName(lastName);
+                    AuthorDao authorDao = new AuthorDao();
+                    authorDao.createAuthor(author);
+
+            }
 
         }
 
