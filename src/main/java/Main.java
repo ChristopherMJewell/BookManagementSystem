@@ -18,7 +18,8 @@ public class Main {
             System.out.println("4: Add Book");
             System.out.println("5: Delete Book");
             System.out.println("6: View Books By Genre");
-            System.out.println("7: ");
+            System.out.println("7: Create Review");
+            System.out.println("8: Delete Review");
 
             int choice = scanner.nextInt();
 
