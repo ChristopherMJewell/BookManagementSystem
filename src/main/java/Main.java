@@ -1,5 +1,3 @@
-import dao.*;
-import entity.*;
 import java.util.Scanner;
 
 
@@ -15,7 +13,11 @@ public class Main {
             System.out.println("2: Delete Author");
             System.out.println("3: Update Author");
             System.out.println("4: Add Book");
-            System.out.println("5: ");
+            System.out.println("5: Delete Book");
+            System.out.println("6: View Books By Genre");
+            System.out.println("7: ");
+
+
         }
 
 

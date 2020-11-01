@@ -1,19 +1,20 @@
-package dao;
+package Repository;
 
-import entity.Books;
+import Model.Author;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.Hibernate;
 
-public class BooksDao {
-    public void createBooks(Books books){
+public class AuthorDao {
+
+    public void createAuthor(Author author){
         Transaction transaction = null;
 
         try{
             Session session = Hibernate.getSessionFactory().openSession();
 
             transaction = session.beginTransaction();
-            session.save(books);
+            session.save(author);
             transaction.commit();
             session.close();
 

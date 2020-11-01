@@ -1,4 +1,4 @@
-package entity;
+package Model;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
