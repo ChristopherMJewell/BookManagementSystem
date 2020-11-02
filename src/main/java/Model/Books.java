@@ -1,9 +1,9 @@
 package Model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+@Entity
+@Table(schema = "bookManagementSystem", name = "books")
 
 public class Books {
 

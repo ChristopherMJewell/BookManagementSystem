@@ -10,15 +10,16 @@ public class BooksDao {
         Transaction transaction = null;
 
         try{
-            Session session = Hibernate.getSessionFactory().openSession();
+            Session session = Hibernate.getConnectionBD();
 
             transaction = session.beginTransaction();
             session.save(books);
             transaction.commit();
-            session.close();
+            //session.close();
 
         }catch(Exception e){
             System.out.println(e.getMessage());
+            //e.printStackTrace();
             if(transaction != null){
                 transaction.rollback();
             }
