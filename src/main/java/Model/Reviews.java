@@ -1,9 +1,10 @@
 package Model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+
+@Entity
+@Table(schema = "bookmanagementsystem", name = "reviews")
 
 public class Reviews {
     @Id
