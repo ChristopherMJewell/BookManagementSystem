@@ -2,10 +2,13 @@ import Model.Author;
 import Repository.AuthorDao;
 
 import java.util.Scanner;
+import org.hibernate.Session;
+import util.Hibernate;
 
 
 public class Main {
     public static void main(String[] args) {
+        Hibernate.getConnectionBD();
         Scanner scanner = new Scanner(System.in);
 
         while(true){
@@ -20,8 +23,12 @@ public class Main {
             System.out.println("6: View Books By Genre");
             System.out.println("7: Create Review");
             System.out.println("8: Delete Review");
+            System.out.println("9: Quit");
 
             int choice = scanner.nextInt();
+            if(choice < 1 || choice > 9){
+                System.out.println("Enter a valid number!\n");
+            }
 
             switch(choice){
                 case 1 :

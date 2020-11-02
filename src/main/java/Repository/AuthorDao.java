@@ -11,15 +11,16 @@ public class AuthorDao {
         Transaction transaction = null;
 
         try{
-            Session session = Hibernate.getSessionFactory().openSession();
+            Session session = Hibernate.getConnectionBD();
 
             transaction = session.beginTransaction();
             session.save(author);
             transaction.commit();
-            session.close();
+            //session.close();
 
         }catch(Exception e){
-            System.out.println(e.getMessage());
+           // System.out.println(e.getMessage());
+            e.printStackTrace();
             if(transaction != null){
                 transaction.rollback();
             }

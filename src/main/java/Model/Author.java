@@ -4,6 +4,8 @@ package Model;
 
 import javax.persistence.*;
 
+@Entity
+@Table(schema = "bookmanagementsystem", name = "authors")
 
 public class Author {
     @Id
