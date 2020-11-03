@@ -1,5 +1,6 @@
 package Repository;
 
+
 import Model.Reviews;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,6 +22,24 @@ public class ReviewsDao {
             System.out.println(e.getMessage());
 
             if(transaction != null){
+                transaction.rollback();
+            }
+        }
+    }
+    public void deleteReview(long id) {
+        Session session = Hibernate.getConnectionBD();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            Reviews reviews = session.find(Reviews.class,id);
+            session.delete(reviews);
+
+            transaction.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+            if (transaction != null) {
                 transaction.rollback();
             }
         }
