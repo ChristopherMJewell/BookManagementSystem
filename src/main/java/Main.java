@@ -1,9 +1,8 @@
 import Model.Author;
 import Repository.AuthorDao;
+import util.Hibernate;
 
 import java.util.Scanner;
-import org.hibernate.Session;
-import util.Hibernate;
 
 
 public class Main {
@@ -41,6 +40,33 @@ public class Main {
                     author.setLastName(lastName);
                     AuthorDao authorDao = new AuthorDao();
                     authorDao.createAuthor(author);
+                    break;
+
+                case 2 :
+                    author = new Author();
+                    System.out.print("Please enter author ID: ");
+                    long authorId  = scanner.nextLong();
+                    author.getId(authorId);
+                    authorDao = new AuthorDao();
+                    authorDao.deleteAuthor(authorId);
+
+                    // list of authors
+                    AuthorDao authorlist = new AuthorDao();
+                    System.out.println(authorlist.getAuthors());
+                    break;
+
+
+                /*case 3 :
+                    Author authorToUpdate = new Author();
+                    System.out.println("Please enter the first name");
+                    String firstName = scanner.next();
+                    author.setFirstName(firstName);
+                    System.out.println("Please enter the last name");
+                    String lastName = scanner.next();
+                    author.setLastName(lastName);
+                    AuthorDao authorDao = new AuthorDao();
+                    authorDao.createAuthor(author);*/
+
 
             }
 

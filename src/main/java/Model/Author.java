@@ -5,7 +5,7 @@ package Model;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "bookmanagementsystem", name = "authors")
+@Table(schema = "BookManagementSystem", name = "authors")
 
 public class Author {
     @Id
@@ -25,6 +25,14 @@ public class Author {
     public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Long getId(Long authorId) {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
