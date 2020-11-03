@@ -26,6 +26,10 @@ public class Reviews {
         this.review = review;
     }
 
+    public Long getId(long id) {
+        return id;
+    }
+
     public int getScore() {
         return score;
     }
