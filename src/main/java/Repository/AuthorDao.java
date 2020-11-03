@@ -52,14 +52,14 @@ public class AuthorDao {
         session.close();
     }
 
-    public void deleteAuthor(Author savedAuthor) {
+    public void deleteAuthor(long id) {
         Session session = Hibernate.getConnectionBD();
         Transaction transaction = null;
 
         try {
             transaction = session.beginTransaction();
-
-            session.delete(savedAuthor);
+            Author author = session.find(Author.class,id);
+            session.delete(author);
 
             transaction.commit();
         } catch (Exception ex) {

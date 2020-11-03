@@ -45,10 +45,10 @@ public class Main {
                 case 2 :
                     author = new Author();
                     System.out.print("Please enter author ID: ");
-                    int authorId  = scanner.nextInt();
+                    long authorId  = scanner.nextLong();
                     author.getId(authorId);
                     authorDao = new AuthorDao();
-                    authorDao.deleteAuthor(author);
+                    authorDao.deleteAuthor(authorId);
 
                     // list of authors
                     AuthorDao authorlist = new AuthorDao();
