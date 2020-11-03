@@ -19,13 +19,12 @@ public class Main {
             System.out.println("3: Update Author");
             System.out.println("4: Add Book");
             System.out.println("5: Delete Book");
-            System.out.println("6: View Books By Genre");
-            System.out.println("7: Create Review");
-            System.out.println("8: Delete Review");
-            System.out.println("9: Quit");
+            System.out.println("6: Create Review");
+            System.out.println("7: Delete Review");
+            System.out.println("8: Quit");
 
             int choice = scanner.nextInt();
-            if(choice < 1 || choice > 9){
+            if(choice < 1 || choice > 8){
                 System.out.println("Enter a valid number!\n");
             }
 
