@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import util.Hibernate;
 
 
-import javax.persistence.EntityManager;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class Main {
             System.out.println("+++++++++++++++++++++++++++++++++++");
             System.out.println();
             System.out.println("1: Create new Author"); //ok
-            System.out.println("2: List all authors"); //ok
+            System.out.println("2: List all Authors"); //ok
             System.out.println("3: Delete Author"); //ok
             System.out.println("4: Update Author"); //nok
             System.out.println("5: Create new Book"); //ok
@@ -74,10 +74,11 @@ public class Main {
                     break;
 
                 case 4: // Update author
-                   /* System.out.println("Please enter the Id of the Author you want to update.");
+                    System.out.println("Please enter the Id of the author you want to update.");
+                    long iD  = scanner.nextLong();
                     AuthorDao authorDao1 = new AuthorDao();
-                    authorDao1.updateAuthor();
-                    break;*/
+                    authorDao1.updateAuthor(iD);
+                    break;
 
 
 
@@ -102,11 +103,11 @@ public class Main {
                     criteria = session.createCriteria(Books.class);
                     List<Books> listOfBooks = criteria.list();
                     for(Books test: listOfBooks) {
-                    System.out.println(test.getId()+ " " + test.getTitle() + " " + test.getGenre() + " Book Description:  " + test.getBookDescription());
+                    System.out.println(test.getId()+ " " + test.getTitle() + " " + test.getGenre() + " Book Description: " + test.getBookDescription());
                     }
                     break;
 
-                case 7 : // delete a abook
+                case 7 : // delete a a book
                     book = new Books();
                     scanner.nextLine();
                     System.out.print("Please enter book ID: ");
@@ -117,6 +118,11 @@ public class Main {
                     break;
 
                 case 8: //update a book
+                    System.out.println("Please enter the Id of the book you want to update.");
+                    long booksId  = scanner.nextLong();
+                    BooksDao booksDao1 = new BooksDao();
+                    booksDao1.updateBook(booksId);
+                    break;
 
 
 

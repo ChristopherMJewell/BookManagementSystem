@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import util.Hibernate;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class AuthorDao {
 
@@ -34,13 +35,22 @@ public class AuthorDao {
         return session.createQuery("from Author", Author.class).list();
     }
 
-    public void updateAuthor(Author savedAuthor) {
+    public void updateAuthor(Long iD) {
+        Scanner scanner = new Scanner(System.in);
         Session session = Hibernate.getConnectionBD();
         Transaction transaction = null;
+        Author author1 = session.find(Author.class,iD);
+        System.out.println("first name?");
+        String newName = scanner.nextLine();
+        System.out.println("last name?");
+        String lastName = scanner.nextLine();
+        author1.setFirstName(newName);
+        author1.setLastName(lastName);
+
 
         try {
             transaction = session.beginTransaction();
-            session.update(savedAuthor);
+            session.update(author1);
             transaction.commit();
         } catch (Exception ex) {
             ex.printStackTrace();

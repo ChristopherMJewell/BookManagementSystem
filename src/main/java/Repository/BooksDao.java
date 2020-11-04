@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import util.Hibernate;
 
 import java.awt.print.Book;
+import java.util.Scanner;
 
 public class BooksDao {
     public void createBooks(Books books){
@@ -45,5 +46,33 @@ public class BooksDao {
                 transaction.rollback();
             }
         }
+    }
+    public void updateBook(Long booksId) {
+        Scanner scanner = new Scanner(System.in);
+        Session session = Hibernate.getConnectionBD();
+        Transaction transaction = null;
+        Books books = session.find(Books.class,booksId);
+        System.out.println("Please enter a new title.");
+        String newTitle = scanner.nextLine();
+        System.out.println("Please enter a new description.");
+        String newDescription = scanner.nextLine();
+        System.out.println("Please enter a new genre.");
+        String newGenre = scanner.nextLine();
+        books.setTitle(newTitle);
+        books.setBookDescription(newDescription);
+        books.setGenre(newGenre);
+
+        try {
+            transaction = session.beginTransaction();
+            session.update(books);
+            transaction.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        session.close();
     }
 }
