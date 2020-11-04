@@ -27,7 +27,7 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public Long getId(Long authorId) {
+    public Long getId() {
         return id;
     }
 
