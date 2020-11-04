@@ -128,6 +128,10 @@ public class Main {
                     break;
 
             }
+
+            if(choice == 8){
+                break;
+            }
         }
     }
 }
