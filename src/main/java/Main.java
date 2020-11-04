@@ -8,6 +8,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import util.Hibernate;
 
+
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,7 +74,10 @@ public class Main {
                     break;
 
                 case 4: // Update author
-                    break;
+                   /* System.out.println("Please enter the Id of the Author you want to update.");
+                    AuthorDao authorDao1 = new AuthorDao();
+                    authorDao1.updateAuthor();
+                    break;*/
 
 
 
@@ -97,7 +102,7 @@ public class Main {
                     criteria = session.createCriteria(Books.class);
                     List<Books> listOfBooks = criteria.list();
                     for(Books test: listOfBooks) {
-                    System.out.println(test.getId()+ " " + test.getTitle() + " " + test.getGenre() + " " + test.getBookDescription());
+                    System.out.println(test.getId()+ " " + test.getTitle() + " " + test.getGenre() + " Book Description:  " + test.getBookDescription());
                     }
                     break;
 
@@ -118,9 +123,9 @@ public class Main {
                 case 9 : // create a Review
                     Reviews reviews = new Reviews();
                     System.out.print("Please enter review of the book:");
+                    scanner.nextLine();
                     String review = scanner.nextLine();
                     reviews.setReview(review);
-                    scanner.nextLine();
                     System.out.print("Please enter score to book from 1 to 10: ");
                     int score = scanner.nextInt();
                     reviews.setScore(score);
