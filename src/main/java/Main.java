@@ -45,10 +45,11 @@ public class Main {
                 case 1 : // create new author
                     Author author = new Author();
                     System.out.println("Please enter the first name");
-                    String firstName = scanner.next();
+                    scanner.nextLine();
+                    String firstName = scanner.nextLine();
                     author.setFirstName(firstName);
                     System.out.println("Please enter the last name");
-                    String lastName = scanner.next();
+                    String lastName = scanner.nextLine();
                     author.setLastName(lastName);
                     AuthorDao authorDao = new AuthorDao();
                     authorDao.createAuthor(author);
@@ -138,6 +139,7 @@ public class Main {
                     ReviewsDao reviewsDao = new ReviewsDao();
                     reviewsDao.createReviews(reviews);
                     break;
+
 
                 case 10 : // delete a review
                     reviews = new Reviews();
