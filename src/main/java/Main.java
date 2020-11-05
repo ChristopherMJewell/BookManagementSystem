@@ -8,151 +8,177 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import util.Hibernate;
 
-
-
 import java.util.List;
 import java.util.Scanner;
-
 
 public class Main {
     public static void main(String[] args) {
         Hibernate.getConnectionBD();
         Scanner scanner = new Scanner(System.in);
 
-        while(true){
+        while (true) {
             System.out.println("Please select one option");
             System.out.println("+++++++++++++++++++++++++++++++++++");
             System.out.println();
-            System.out.println("1: Create new Author"); //ok
-            System.out.println("2: List all Authors"); //ok
-            System.out.println("3: Delete Author"); //ok
-            System.out.println("4: Update Author"); //nok
-            System.out.println("5: Create new Book"); //ok
-            System.out.println("6: List all Books"); //ok
-            System.out.println("7: Delete a Book"); //ok
-            System.out.println("8: Update a Book"); //ok
-            System.out.println("9: Create a Review"); //ok
-            System.out.println("10: Delete a Review"); //ok
-            System.out.println("11: Exit program"); //ok
+            System.out.println("1: Books");
+            System.out.println("2: Authors");
+            System.out.println("3: Reviews");
+            System.out.println("4: Exit");
 
             int choice = scanner.nextInt();
-            if(choice < 1 || choice > 11){
-                System.out.println("Enter a valid number!\n");
-            }
+//            if (choice > 1 || choice < 4) {
+//                System.out.println("Enter a valid number!\n");
+//            }
 
-            switch(choice){
+            if (choice == 1) {
+                System.out.println("1: Create new Book");
+                System.out.println("2: List all Books");
+                System.out.println("3: Delete a Book");
+                System.out.println("4: Update a Book");
+                System.out.println("5: Exit submenu");
 
-                case 1 : // create new author
-                    Author author = new Author();
-                    System.out.println("Please enter the first name");
-                    scanner.nextLine();
-                    String firstName = scanner.nextLine();
-                    author.setFirstName(firstName);
-                    System.out.println("Please enter the last name");
-                    String lastName = scanner.nextLine();
-                    author.setLastName(lastName);
-                    AuthorDao authorDao = new AuthorDao();
-                    authorDao.createAuthor(author);
-                    break;
+                int bookChoice = scanner.nextInt();
+                if (bookChoice > 1 || choice < 5) {
+                    switch (bookChoice) {
+                        case 1: // create a book
+                            System.out.println("Enter a valid number!\n");
+                            Books book = new Books();
+                            System.out.print("Please enter the title of the book: ");
+                            scanner.nextLine();
+                            String title = scanner.nextLine();
+                            book.setTitle(title);
+                            System.out.print("Please enter short description of the book: ");
+                            String bookDescription = scanner.nextLine();
+                            book.setBookDescription(bookDescription);
+                            System.out.print("Please enter genre of the book: ");
+                            String genre = scanner.nextLine();
+                            book.setGenre(genre);
+                            BooksDao booksDao = new BooksDao();
+                            booksDao.createBooks(book);
+                            break;
 
-                case 2 :  // List all authors
-                    Session session = Hibernate.getConnectionBD();
-                    Criteria criteria = session.createCriteria(Author.class);
-                    List<Author> listOfAuthors = criteria.list();
-                    for(Author test: listOfAuthors) {
-                        System.out.println(test.getId()+ " " + test.getFirstName() + " " + test.getLastName());
+                        case 2: // List all books
+                            Session session = Hibernate.getConnectionBD();
+                            session = Hibernate.getConnectionBD();
+                            Criteria criteria = session.createCriteria(Books.class);
+                            List<Books> listOfBooks = criteria.list();
+                            for (Books test : listOfBooks) {
+                                System.out.println(test.getId() + " " + test.getTitle() + " " + test.getGenre() + " Book Description: " + test.getBookDescription());
+                            }
+                            break;
+
+                        case 3: // delete a a book
+                            book = new Books();
+                            scanner.nextLine();
+                            System.out.print("Please enter book ID: ");
+                            long bookId = scanner.nextLong();
+                            book.getId();
+                            booksDao = new BooksDao();
+                            booksDao.deleteBook(bookId);
+                            break;
+
+                        case 4: //update a book
+                            System.out.println("Please enter the Id of the book you want to update.");
+                            long booksId = scanner.nextLong();
+                            BooksDao booksDao1 = new BooksDao();
+                            booksDao1.updateBook(booksId);
+                            break;
+
+                        case 5:
+                            break;
                     }
-                    break;
+                }
+                } else if (choice == 2) {
+                    System.out.println("1: Create new Author");
+                    System.out.println("2: List all Authors");
+                    System.out.println("3: Delete Author");
+                    System.out.println("4: Update Author");
+                    System.out.println("5: Exit submenu");
+                    int authorChoice = scanner.nextInt();
+                    if (authorChoice > 1 || choice < 5) {
+                        switch (authorChoice) {
+                            case 1: // create new author
+                                Author author = new Author();
+                                System.out.println("Please enter the first name");
+                                scanner.nextLine();
+                                String firstName = scanner.nextLine();
+                                author.setFirstName(firstName);
+                                System.out.println("Please enter the last name");
+                                String lastName = scanner.nextLine();
+                                author.setLastName(lastName);
+                                AuthorDao authorDao = new AuthorDao();
+                                authorDao.createAuthor(author);
+                                break;
 
+                            case 2:  // List all authors
+                                Session session = Hibernate.getConnectionBD();
+                                Criteria criteria = session.createCriteria(Author.class);
+                                List<Author> listOfAuthors = criteria.list();
+                                for (Author test : listOfAuthors) {
+                                    System.out.println(test.getId() + " " + test.getFirstName() + " " + test.getLastName());
+                                }
+                                break;
 
-                case 3: // delete author
-                    author = new Author();
-                    System.out.print("Please enter author ID: ");
-                    long authorId  = scanner.nextLong();
-                    author.getId();
-                    authorDao = new AuthorDao();
-                    authorDao.deleteAuthor(authorId);
-                    break;
+                            case 3: // delete author
+                                author = new Author();
+                                System.out.print("Please enter author ID: ");
+                                long authorId = scanner.nextLong();
+                                author.getId();
+                                authorDao = new AuthorDao();
+                                authorDao.deleteAuthor(authorId);
+                                break;
 
-                case 4: // Update author
-                    System.out.println("Please enter the Id of the author you want to update.");
-                    long iD  = scanner.nextLong();
-                    AuthorDao authorDao1 = new AuthorDao();
-                    authorDao1.updateAuthor(iD);
-                    break;
+                            case 4: // Update author
+                                System.out.println("Please enter the Id of the author you want to update.");
+                                long iD = scanner.nextLong();
+                                AuthorDao authorDao1 = new AuthorDao();
+                                authorDao1.updateAuthor(iD);
+                                break;
 
-
-
-                case 5 : // Create new Book
-                    Books book = new Books();
-                    System.out.print("Please enter the title of the book: ");
-                    scanner.nextLine();
-                    String title = scanner.nextLine();
-                    book.setTitle(title);
-                    System.out.print("Please enter short description of the book: ");
-                    String bookDescription = scanner.nextLine();
-                    book.setBookDescription(bookDescription);
-                    System.out.print("Please enter genre of the book: ");
-                    String genre = scanner.nextLine();
-                    book.setGenre(genre);
-                    BooksDao booksDao = new BooksDao();
-                    booksDao.createBooks(book);
-                    break;
-
-                case 6: // List all books
-                    session = Hibernate.getConnectionBD();
-                    criteria = session.createCriteria(Books.class);
-                    List<Books> listOfBooks = criteria.list();
-                    for(Books test: listOfBooks) {
-                    System.out.println(test.getId()+ " " + test.getTitle() + " " + test.getGenre() + " Book Description: " + test.getBookDescription());
+                            case 5: // Exit
+                                break;
+                        }
                     }
-                    break;
+                } else if (choice == 3) { // Review submenu
+                System.out.println("1: Create a Review");
+                System.out.println("2: Delete a Review");
+                System.out.println("3: Exit submenu");
 
-                case 7 : // delete a a book
-                    book = new Books();
-                    scanner.nextLine();
-                    System.out.print("Please enter book ID: ");
-                    long bookId  = scanner.nextLong();
-                    book.getId();
-                    booksDao = new BooksDao();
-                    booksDao.deleteBook(bookId);
-                    break;
-
-                case 8: //update a book
-                    System.out.println("Please enter the Id of the book you want to update.");
-                    long booksId  = scanner.nextLong();
-                    BooksDao booksDao1 = new BooksDao();
-                    booksDao1.updateBook(booksId);
-                    break;
-
-
-
-                case 9 : // create a Review
-                    Reviews reviews = new Reviews();
-                    System.out.print("Please enter review of the book:");
-                    scanner.nextLine();
-                    String review = scanner.nextLine();
-                    reviews.setReview(review);
-                    System.out.print("Please enter score to book from 1 to 10: ");
-                    int score = scanner.nextInt();
-                    reviews.setScore(score);
-                    ReviewsDao reviewsDao = new ReviewsDao();
-                    reviewsDao.createReviews(reviews);
-                    break;
+                int reviewChoice = scanner.nextInt();
+                if (reviewChoice > 1 || choice < 3) {
+                    switch (reviewChoice) {
+                        case 1: // create a Review
+                            Reviews reviews = new Reviews();
+                            System.out.print("Please enter review of the book:");
+                            scanner.nextLine();
+                            String review = scanner.nextLine();
+                            reviews.setReview(review);
+                            System.out.print("Please enter score to book from 1 to 10: ");
+                            int score = scanner.nextInt();
+                            reviews.setScore(score);
+                            ReviewsDao reviewsDao = new ReviewsDao();
+                            reviewsDao.createReviews(reviews);
+                            break;
 
 
-                case 10 : // delete a review
-                    reviews = new Reviews();
-                    System.out.print("Please enter review ID: ");
-                    long reviewId  = scanner.nextLong();
-                    reviews.getId(reviewId);
-                    ReviewsDao reviewsDao1 = new ReviewsDao();
-                    reviewsDao1.deleteReview(reviewId);
-                    break;
+                        case 2: // delete a review
+                            reviews = new Reviews();
+                            System.out.print("Please enter review ID: ");
+                            long reviewId = scanner.nextLong();
+                            reviews.getId(reviewId);
+                            ReviewsDao reviewsDao1 = new ReviewsDao();
+                            reviewsDao1.deleteReview(reviewId);
+                            break;
+
+                        case 3: // Exit
+                            break;
+                    }
+                }
             }
-            if(choice == 11){
-                break;
+                    if (choice == 4) {
+                        break;
+                    }
+                }
             }
         }
-    }
-}
+
